@@ -11,10 +11,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v3
       - name: Build with Gradle
-         run: make build
+         run: ./gradlew build
       - name: Quality check
-         run: make lint
-         run: make test
+         run: ./gradlew checkstyleMain
+         run: ./gradlew checkstyleTest
+         run: ./gradlew test
       - name: Publish code coverage
       	uses: paambaati/codeclimate-action@v5.0.0
         env:
