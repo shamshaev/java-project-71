@@ -20,9 +20,9 @@ public class App implements Callable<Integer> {
     @Parameters(index = "1", description = "path to second file", paramLabel = "filepath2")
     private String filepath2;
 
-    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]",
+    @Option(names = {"-f", "--format"}, defaultValue = "stylish", description = "output format [default: stylish]",
             paramLabel = "format")
-    private String format = "stylish";
+    private String format;
 
     @Override
     public Integer call() throws Exception {
@@ -34,8 +34,15 @@ public class App implements Callable<Integer> {
 
         var map1 = Parser.parse(filepath1, content1);
         var map2 = Parser.parse(filepath2, content2);
+        var diff = Differ.generate(map1, map2);
 
-        System.out.println(Differ.generate(map1, map2));
+        switch (format) {
+            case "stylish" -> System.out.println(Formatter.formatStylish(diff));
+            case "plain text" -> System.out.println(Formatter.formatPlainText(diff));
+            case "json" -> System.out.println(Formatter.formatJson(diff));
+            default -> System.out.println("Unknown format: " + format);
+        }
+
         return 0;
     }
     public static void main(String[] args) {

@@ -1,33 +1,32 @@
 package hexlet.code;
 
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Objects;
+import java.util.TreeMap;
 import java.util.stream.Stream;
 
 public class Differ {
-    public static String generate(Map<String, Object> map1, Map<String, Object> map2) {
-        if (map1.isEmpty() && map2.isEmpty()) {
-            return "{}";
-        }
-
-        return Stream.of(map1, map2)
+    public static Map<String, Object> generate(Map<String, Object> map1, Map<String, Object> map2) {
+        var keys = Stream.of(map1, map2)
                 .flatMap(map -> map.keySet().stream())
                 .distinct()
-                .sorted()
-                .map(key -> generateStylish(key, map1, map2))
-                .collect(Collectors.joining("\n", "{\n", "\n}"));
-    }
+                .toList();
 
-    public static String generateStylish(String key, Map<String, Object> map1, Map<String, Object> map2) {
-        if (map1.containsKey(key) && !map2.containsKey(key)) {
-            return "  - " + key + ": " + map1.get(key);
+        Map<String, Object> diff = new TreeMap<>();
+
+        for (var key : keys) {
+            if (map1.containsKey(key) && !map2.containsKey(key)) {
+                diff.put(key + " 1", map1.get(key));
+            } else if (!map1.containsKey(key) && map2.containsKey(key)) {
+                diff.put(key + " 2", map2.get(key));
+            } else if (Objects.equals(map1.get(key), map2.get(key))) {
+                diff.put(key + " 0", map1.get(key));
+            } else {
+                diff.put(key + " 1", map1.get(key));
+                diff.put(key + " 2", map2.get(key));
+            }
         }
-        if (!map1.containsKey(key) && map2.containsKey(key)) {
-            return "  + " + key + ": " + map2.get(key);
-        }
-        if (map1.get(key).equals(map2.get(key))) {
-            return "    " + key + ": " + map1.get(key);
-        }
-        return "  - " + key + ": " + map1.get(key) + "\n" + "  + " + key + ": " + map2.get(key);
+
+        return diff;
     }
 }
