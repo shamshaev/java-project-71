@@ -48,10 +48,38 @@ public class AppTest {
         assertEquals("", err.toString());
     }
 
+    public void testPLainYml() {
+        var expected = "{\n"
+                + "  - follow: false\n"
+                + "    host: hexlet.io\n"
+                + "  - proxy: 123.234.53.22\n"
+                + "  - timeout: 50\n"
+                + "  + timeout: 20\n"
+                + "  + verbose: true\n"
+                + "}\n";
+        String[] args = "src/test/resources/filePlain1.yml src/test/resources/filePlain2.yml".split(" ");
+        new CommandLine(new App()).execute(args);
+        var actual = out.toString();
+
+        assertEquals(expected, actual);
+        assertEquals("", err.toString());
+    }
+
     @Test
     public void testEmptyJson() {
         var expected = "{}\n";
         String[] args = "src/test/resources/fileEmpty1.json src/test/resources/fileEmpty2.json".split(" ");
+        new CommandLine(new App()).execute(args);
+        var actual = out.toString();
+        System.out.println(actual);
+        assertEquals(expected, actual);
+        assertEquals("", err.toString());
+    }
+
+    @Test
+    public void testEmptyYml() {
+        var expected = "{}\n";
+        String[] args = "src/test/resources/fileEmpty1.yml src/test/resources/fileEmpty2.yml".split(" ");
         new CommandLine(new App()).execute(args);
         var actual = out.toString();
         System.out.println(actual);

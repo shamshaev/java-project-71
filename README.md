@@ -4,5 +4,5 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/753b1554ef4c8dbefd86/maintainability)](https://codeclimate.com/github/shamshaev/java-project-71/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/753b1554ef4c8dbefd86/test_coverage)](https://codeclimate.com/github/shamshaev/java-project-71/test_coverage)
 
-https://asciinema.org/connect/94fd2f2a-8ead-4b2d-892b-eb02c207abb6
-
+https://asciinema.org/a/X12UUZEkNjCvVlyAw7A0aDQ9I
+https://asciinema.org/a/aCttTQ0aazfNixtt37ZDg0L40

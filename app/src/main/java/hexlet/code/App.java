@@ -29,10 +29,13 @@ public class App implements Callable<Integer> {
         Path path1 = Paths.get(filepath1).toAbsolutePath().normalize();
         Path path2 = Paths.get(filepath2).toAbsolutePath().normalize();
 
-        String content1 = Files.readString(path1);
-        String content2 = Files.readString(path2);
+        var content1 = Files.readString(path1);
+        var content2 = Files.readString(path2);
 
-        System.out.println(Differ.generate(content1, content2));
+        var map1 = Parser.parse(filepath1, content1);
+        var map2 = Parser.parse(filepath2, content2);
+
+        System.out.println(Differ.generate(map1, map2));
         return 0;
     }
     public static void main(String[] args) {
