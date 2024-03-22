@@ -10,7 +10,7 @@ import java.io.PrintStream;
 
 import picocli.CommandLine;
 
-public class AppTest {
+public class AppTestStylish {
     final PrintStream originalOut = System.out;
     final PrintStream originalErr = System.err;
     final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -31,7 +31,7 @@ public class AppTest {
     }
 
     @Test
-    public void testNestedJson() {
+    public void testJsonNested() {
         var expected = "{\n"
                 + "    chars1: [a, b, c]\n"
                 + "  - chars2: [d, e, f]\n"
@@ -66,7 +66,7 @@ public class AppTest {
     }
 
     @Test
-    public void testNestedYml() {
+    public void testYmlNested() {
         var expected = "{\n"
                 + "    chars1: [a, b, c]\n"
                 + "  - chars2: [d, e, f]\n"
@@ -101,7 +101,7 @@ public class AppTest {
     }
 
     @Test
-    public void testEmptyJson() {
+    public void testJsonEmpty() {
         var expected = "{}\n";
         String[] args = "src/test/resources/fileEmpty1.json src/test/resources/fileEmpty2.json".split(" ");
         new CommandLine(new App()).execute(args);
@@ -112,7 +112,7 @@ public class AppTest {
     }
 
     @Test
-    public void testEmptyYml() {
+    public void testYmlEmpty() {
         var expected = "{}\n";
         String[] args = "src/test/resources/fileEmpty1.yml src/test/resources/fileEmpty2.yml".split(" ");
         new CommandLine(new App()).execute(args);
@@ -121,5 +121,4 @@ public class AppTest {
         assertEquals(expected, actual);
         assertEquals("", err.toString());
     }
-
 }

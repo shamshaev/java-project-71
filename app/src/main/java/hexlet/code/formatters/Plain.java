@@ -44,6 +44,8 @@ public class Plain {
     public static String getValue(Object value) {
         if (value instanceof Collection<?> || value instanceof Map<?, ?>) {
             return "[complex value]";
+        } else if (value instanceof String) {
+            return "'" + value + "'";
         }
         return String.valueOf(value);
     }
