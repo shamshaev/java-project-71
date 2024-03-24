@@ -14,7 +14,7 @@ public class Parser {
     public static Map<String, Object> parse(String filePath) throws Exception {
         Path path = Paths.get(filePath).toAbsolutePath().normalize();
         var content = Files.readString(path);
-        var fileExtension = filePath.substring(filePath.indexOf('.') + 1);
+        var fileExtension = filePath.substring(filePath.indexOf('.', 1) + 1);
 
         Function<String, ObjectMapper> mapper = str -> {
             if (str.equals("json")) {
