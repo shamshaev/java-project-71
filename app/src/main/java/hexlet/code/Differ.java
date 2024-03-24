@@ -9,9 +9,4 @@ public class Differ {
 
         return Formatter.format(diffMap, formatName);
     }
-
-    public static String generate(String filePath1, String filePath2) throws Exception {
-        var formatName = "stylish";
-        return generate(filePath1, filePath2, formatName);
-    }
 }

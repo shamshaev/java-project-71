@@ -247,4 +247,15 @@ public class AppTest {
         assertEquals(expected, actual);
         assertEquals("", err.toString());
     }
+
+    @Test
+    public void testWrongFormat() {
+        var expected = "Unknown output format: strait\n";
+        String[] args = "-f strait src/test/resources/fileNested1.json src/test/resources/fileNested2.json".split(" ");
+        new CommandLine(new App()).execute(args);
+        var actual = out.toString();
+
+        assertEquals(expected, actual);
+        assertEquals("", err.toString());
+    }
 }

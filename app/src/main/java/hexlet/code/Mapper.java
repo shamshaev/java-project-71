@@ -18,23 +18,30 @@ public class Mapper {
         var diffMap = new TreeMap<String, List<Object>>();
 
         for (var key : keyList) {
-            var valueList = new ArrayList<>();
-            if (map1.containsKey(key) && !map2.containsKey(key)) {
-                valueList.add("deleted");
-                valueList.add(map1.get(key));
-            } else if (!map1.containsKey(key) && map2.containsKey(key)) {
-                valueList.add("added");
-                valueList.add(map2.get(key));
-            } else if (Objects.equals(map1.get(key), map2.get(key))) {
-                valueList.add("not changed");
-                valueList.add(map1.get(key));
-            } else {
-                valueList.add("changed");
-                valueList.add(map1.get(key));
-                valueList.add(map2.get(key));
-            }
-            diffMap.put(key, valueList);
+            diffMap.put(key, generateValueList(key, map1, map2));
         }
         return diffMap;
     }
+
+    public static List<Object> generateValueList(String key, Map<String, Object> map1, Map<String, Object> map2) {
+        var valueList = new ArrayList<>();
+        if (map1.containsKey(key) && !map2.containsKey(key)) {
+            valueList.add("deleted");
+            valueList.add(map1.get(key));
+        } else if (!map1.containsKey(key) && map2.containsKey(key)) {
+            valueList.add("added");
+            valueList.add(map2.get(key));
+        } else if (Objects.equals(map1.get(key), map2.get(key))) {
+            valueList.add("not changed");
+            valueList.add(map1.get(key));
+        } else {
+            valueList.add("changed");
+            valueList.add(map1.get(key));
+            valueList.add(map2.get(key));
+        }
+        return valueList;
+    }
+
+
+
 }
