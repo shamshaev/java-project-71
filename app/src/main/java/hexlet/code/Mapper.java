@@ -41,7 +41,4 @@ public class Mapper {
         }
         return valueList;
     }
-
-
-
 }
