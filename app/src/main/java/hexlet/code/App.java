@@ -23,7 +23,7 @@ public class App implements Callable<Integer> {
 
 
     @Override
-    public Integer call() throws Exception {
+    public final Integer call() throws Exception {
         var diff = Differ.generate(filePath1, filePath2, formatName);
         System.out.println(diff);
 
