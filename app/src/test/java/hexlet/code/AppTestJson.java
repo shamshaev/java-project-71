@@ -33,15 +33,14 @@ public class AppTestJson {
 
     @Test
     public void testJsonNested() {
-        var expected = "{\"chars1\":{\"1\":[\"a\",\"b\",\"c\"],\"2\":[\"a\",\"b\",\"c\"]},"
-            + "\"chars2\":{\"1\":[\"d\",\"e\",\"f\"],\"2\":false},\"checked\":{\"1\":false,\"2\":true},"
-            + "\"default\":{\"1\":null,\"2\":[\"value1\",\"value2\"]},\"id\":{\"1\":45,\"2\":null},"
-            + "\"key1\":{\"1\":\"value1\"},\"key2\":{\"2\":\"value2\"},\"numbers1\":{\"1\":[1,2,3,4],"
-            + "\"2\":[1,2,3,4]},\"numbers2\":{\"1\":[2,3,4,5],\"2\":[22,33,44,55]},"
-            + "\"numbers3\":{\"1\":[3,4,5]},\"numbers4\":{\"2\":[4,5,6]},"
-            + "\"obj1\":{\"2\":{\"nestedKey\":\"value\",\"isNested\":true}},"
-            + "\"setting1\":{\"1\":\"Some value\",\"2\":\"Another value\"},\"setting2\":{\"1\":200,"
-            + "\"2\":300},\"setting3\":{\"1\":true,\"2\":\"none\"}}\n";
+        var expected = "{\"chars1\":[\"not changed\",[\"a\",\"b\",\"c\"]],\"chars2\":[\"changed\","
+                + "[\"d\",\"e\",\"f\"],false],\"checked\":[\"changed\",false,true],\"default\":[\"changed\","
+                + "null,[\"value1\",\"value2\"]],\"id\":[\"changed\",45,null],\"key1\":[\"deleted\","
+                + "\"value1\"],\"key2\":[\"added\",\"value2\"],\"numbers1\":[\"not changed\",[1,2,3,4]],"
+                + "\"numbers2\":[\"changed\",[2,3,4,5],[22,33,44,55]],\"numbers3\":[\"deleted\",[3,4,5]],"
+                + "\"numbers4\":[\"added\",[4,5,6]],\"obj1\":[\"added\",{\"nestedKey\":\"value\","
+                + "\"isNested\":true}],\"setting1\":[\"changed\",\"Some value\",\"Another value\"],"
+                + "\"setting2\":[\"changed\",200,300],\"setting3\":[\"changed\",true,\"none\"]}\n";
         String[] args = "-f json src/test/resources/fileNested1.json src/test/resources/fileNested2.json".split(" ");
         new CommandLine(new App()).execute(args);
         var actual = out.toString();
@@ -52,15 +51,14 @@ public class AppTestJson {
 
     @Test
     public void testYmlNested() {
-        var expected = "{\"chars1\":{\"1\":[\"a\",\"b\",\"c\"],\"2\":[\"a\",\"b\",\"c\"]},"
-                + "\"chars2\":{\"1\":[\"d\",\"e\",\"f\"],\"2\":false},\"checked\":{\"1\":false,\"2\":true},"
-                + "\"default\":{\"1\":null,\"2\":[\"value1\",\"value2\"]},\"id\":{\"1\":45,\"2\":null},"
-                + "\"key1\":{\"1\":\"value1\"},\"key2\":{\"2\":\"value2\"},\"numbers1\":{\"1\":[1,2,3,4],"
-                + "\"2\":[1,2,3,4]},\"numbers2\":{\"1\":[2,3,4,5],\"2\":[22,33,44,55]},"
-                + "\"numbers3\":{\"1\":[3,4,5]},\"numbers4\":{\"2\":[4,5,6]},"
-                + "\"obj1\":{\"2\":{\"nestedKey\":\"value\",\"isNested\":true}},"
-                + "\"setting1\":{\"1\":\"Some value\",\"2\":\"Another value\"},\"setting2\":{\"1\":200,"
-                + "\"2\":300},\"setting3\":{\"1\":true,\"2\":\"none\"}}\n";
+        var expected = "{\"chars1\":[\"not changed\",[\"a\",\"b\",\"c\"]],\"chars2\":[\"changed\","
+                + "[\"d\",\"e\",\"f\"],false],\"checked\":[\"changed\",false,true],\"default\":[\"changed\","
+                + "null,[\"value1\",\"value2\"]],\"id\":[\"changed\",45,null],\"key1\":[\"deleted\","
+                + "\"value1\"],\"key2\":[\"added\",\"value2\"],\"numbers1\":[\"not changed\",[1,2,3,4]],"
+                + "\"numbers2\":[\"changed\",[2,3,4,5],[22,33,44,55]],\"numbers3\":[\"deleted\",[3,4,5]],"
+                + "\"numbers4\":[\"added\",[4,5,6]],\"obj1\":[\"added\",{\"nestedKey\":\"value\","
+                + "\"isNested\":true}],\"setting1\":[\"changed\",\"Some value\",\"Another value\"],"
+                + "\"setting2\":[\"changed\",200,300],\"setting3\":[\"changed\",true,\"none\"]}\n";
         String[] args = "-f json src/test/resources/fileNested1.yml src/test/resources/fileNested2.yml".split(" ");
         new CommandLine(new App()).execute(args);
         var actual = out.toString();

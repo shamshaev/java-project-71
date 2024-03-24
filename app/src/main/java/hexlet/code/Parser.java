@@ -17,10 +17,12 @@ public class Parser {
         var fileExtension = filePath.substring(filePath.indexOf('.') + 1);
 
         Function<String, ObjectMapper> mapper = str -> {
-            if (str.equals("yml")) {
+            if (str.equals("json")) {
+                return new ObjectMapper();
+            } else if (str.equals("yml")) {
                 return new YAMLMapper();
             } else {
-                return new ObjectMapper();
+                throw new RuntimeException("Unknown file extension: " + fileExtension);
             }
         };
 
