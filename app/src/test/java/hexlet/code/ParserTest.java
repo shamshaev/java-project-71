@@ -1,14 +1,22 @@
 package hexlet.code;
 
 import org.junit.jupiter.api.Test;
+
+import static hexlet.code.Differ.getContent;
+import static hexlet.code.Differ.getDataFormat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
+    // без этих тестов падает % покрытия на Code Climate
     @Test
-    void testException() {
+    void testException() throws Exception {
+        var filePath = String.join("/", "src", "test", "resources", "fixtures", "file.js");
+        var content = getContent(filePath);
+        var dataFormat = getDataFormat(filePath);
+
         Exception exception = assertThrows(RuntimeException.class, () ->
-                Parser.parse("src/test/resources/file.js"));
-        assertEquals("Unknown file extension: js", exception.getMessage());
+                Parser.parse(content, dataFormat));
+        assertEquals("Unknown data format: " + dataFormat, exception.getMessage());
     }
 }

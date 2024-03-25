@@ -4,20 +4,21 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Comparator;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 public class Mapper {
     public static Map<String, List<Object>> generateDiffMap(Map<String, Object> map1, Map<String, Object> map2) {
 
-        var keyList = Stream.of(map1, map2)
-                .flatMap(map -> map.keySet().stream())
-                .distinct()
-                .toList();
+        Set<String> keys = new TreeSet<>(Comparator.naturalOrder());
+        keys.addAll(map1.keySet());
+        keys.addAll(map2.keySet());
 
         var diffMap = new TreeMap<String, List<Object>>();
 
-        for (var key : keyList) {
+        for (var key : keys) {
             diffMap.put(key, generateValueList(key, map1, map2));
         }
         return diffMap;

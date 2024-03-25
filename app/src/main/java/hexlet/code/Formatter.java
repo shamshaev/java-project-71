@@ -14,7 +14,7 @@ public class Formatter {
             case "stylish" -> Stylish.format(diffMap);
             case "plain" -> Plain.format(diffMap);
             case "json" -> Json.format(diffMap);
-            default -> "Unknown output format: " + formatName;
+            default -> throw new RuntimeException("Unknown output format: " + formatName);
         };
     }
 }
