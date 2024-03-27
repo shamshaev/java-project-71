@@ -71,6 +71,60 @@ public class AppTest {
     }
 
     @Test
+    public void testInNestedJsonOutDefault() {
+        var expected = resultStylish + "\n";
+
+        var commandLineString = filePathNestedJson1 + " " + filePathNestedJson2;
+        String[] args = commandLineString.split(" ");
+        new CommandLine(new App()).execute(args);
+        var actual = out.toString();
+
+        assertEquals(expected, actual);
+        assertEquals("", err.toString());
+    }
+
+    @Test
+    public void testInNestedYmlOutDefault() {
+        var expected = resultStylish + "\n";
+
+        var commandLineString = filePathNestedYml1 + " " + filePathNestedYml2;
+        String[] args = commandLineString.split(" ");
+        new CommandLine(new App()).execute(args);
+        var actual = out.toString();
+
+        assertEquals(expected, actual);
+        assertEquals("", err.toString());
+    }
+
+    @Test
+    public void testInEmptyJsonOutDefault() {
+        var expected = "{}\n";
+
+        var commandLineString = filePathEmptyJson + " " + filePathEmptyJson;
+        String[] args = commandLineString.split(" ");
+        new CommandLine(new App()).execute(args);
+        var actual = out.toString();
+        System.out.println(actual);
+
+        assertEquals(expected, actual);
+        assertEquals("", err.toString());
+    }
+
+    @Test
+    public void testInEmptyYmlOutDefault() {
+        var expected = "{}\n";
+
+        var commandLineString = filePathEmptyYml + " " + filePathEmptyYml;
+        String[] args = commandLineString.split(" ");
+        new CommandLine(new App()).execute(args);
+        var actual = out.toString();
+        System.out.println(actual);
+
+        assertEquals(expected, actual);
+        assertEquals("", err.toString());
+    }
+
+    @Test
     public void testInNestedJsonOutStylish() {
         var expected = resultStylish + "\n";
 

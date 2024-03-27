@@ -15,8 +15,8 @@ public class ParserTest {
         var content = getContent(filePath);
         var dataFormat = getDataFormat(filePath);
 
-        Exception exception = assertThrows(RuntimeException.class, () ->
+        Exception exception = assertThrows(Exception.class, () ->
                 Parser.parse(content, dataFormat));
-        assertEquals("Unknown data format: " + dataFormat, exception.getMessage());
+        assertEquals("Unknown format: '" + dataFormat + "'", exception.getMessage());
     }
 }
