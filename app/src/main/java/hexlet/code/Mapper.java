@@ -35,10 +35,12 @@ public class Mapper {
         } else if (Objects.equals(map1.get(key), map2.get(key))) {
             valueList.add("not changed");
             valueList.add(map1.get(key));
-        } else {
+        } else if (!Objects.equals(map1.get(key), map2.get(key))) {
             valueList.add("changed");
             valueList.add(map1.get(key));
             valueList.add(map2.get(key));
+        } else {
+            throw new RuntimeException("Unknown key: " + key);
         }
         return valueList;
     }

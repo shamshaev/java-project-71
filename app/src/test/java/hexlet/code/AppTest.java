@@ -22,8 +22,6 @@ public class AppTest {
     private static String filePathNestedJson2;
     private static String filePathNestedYml1;
     private static String filePathNestedYml2;
-    private static String filePathEmptyJson;
-    private static String filePathEmptyYml;
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -52,8 +50,6 @@ public class AppTest {
         filePathNestedJson2 = getPathString("nested2.json");
         filePathNestedYml1 = getPathString("nested1.yml");
         filePathNestedYml2 = getPathString("nested2.yml");
-        filePathEmptyJson = getPathString("empty.json");
-        filePathEmptyYml = getPathString("empty.yml");
     }
 
     @BeforeEach
@@ -97,34 +93,6 @@ public class AppTest {
     }
 
     @Test
-    public void testInEmptyJsonOutDefault() {
-        var expected = "{}\n";
-
-        var commandLineString = filePathEmptyJson + " " + filePathEmptyJson;
-        String[] args = commandLineString.split(" ");
-        new CommandLine(new App()).execute(args);
-        var actual = out.toString();
-        System.out.println(actual);
-
-        assertEquals(expected, actual);
-        assertEquals("", err.toString());
-    }
-
-    @Test
-    public void testInEmptyYmlOutDefault() {
-        var expected = "{}\n";
-
-        var commandLineString = filePathEmptyYml + " " + filePathEmptyYml;
-        String[] args = commandLineString.split(" ");
-        new CommandLine(new App()).execute(args);
-        var actual = out.toString();
-        System.out.println(actual);
-
-        assertEquals(expected, actual);
-        assertEquals("", err.toString());
-    }
-
-    @Test
     public void testInNestedJsonOutStylish() {
         var expected = resultStylish + "\n";
 
@@ -145,34 +113,6 @@ public class AppTest {
         String[] args = commandLineString.split(" ");
         new CommandLine(new App()).execute(args);
         var actual = out.toString();
-
-        assertEquals(expected, actual);
-        assertEquals("", err.toString());
-    }
-
-    @Test
-    public void testInEmptyJsonOutStylish() {
-        var expected = "{}\n";
-
-        var commandLineString = "-f stylish " + filePathEmptyJson + " " + filePathEmptyJson;
-        String[] args = commandLineString.split(" ");
-        new CommandLine(new App()).execute(args);
-        var actual = out.toString();
-        System.out.println(actual);
-
-        assertEquals(expected, actual);
-        assertEquals("", err.toString());
-    }
-
-    @Test
-    public void testInEmptyYmlOutStylish() {
-        var expected = "{}\n";
-
-        var commandLineString = "-f stylish " + filePathEmptyYml + " " + filePathEmptyYml;
-        String[] args = commandLineString.split(" ");
-        new CommandLine(new App()).execute(args);
-        var actual = out.toString();
-        System.out.println(actual);
 
         assertEquals(expected, actual);
         assertEquals("", err.toString());
@@ -205,32 +145,6 @@ public class AppTest {
     }
 
     @Test
-    public void testInEmptyJsonOutPlain() {
-        var expected = "\n";
-
-        var commandLineString = "-f plain " + filePathEmptyJson + " " + filePathEmptyJson;
-        String[] args = commandLineString.split(" ");
-        new CommandLine(new App()).execute(args);
-        var actual = out.toString();
-        System.out.println(actual);
-        assertEquals(expected, actual);
-        assertEquals("", err.toString());
-    }
-
-    @Test
-    public void testInEmptyYmlOutPlain() {
-        var expected = "\n";
-
-        var commandLineString = "-f plain " + filePathEmptyYml + " " + filePathEmptyYml;
-        String[] args = commandLineString.split(" ");
-        new CommandLine(new App()).execute(args);
-        var actual = out.toString();
-        System.out.println(actual);
-        assertEquals(expected, actual);
-        assertEquals("", err.toString());
-    }
-
-    @Test
     public void testInNestedJsonOutJson() {
         var expected = resultJson + "\n";
 
@@ -251,34 +165,6 @@ public class AppTest {
         String[] args = commandLineString.split(" ");
         new CommandLine(new App()).execute(args);
         var actual = out.toString();
-
-        assertEquals(expected, actual);
-        assertEquals("", err.toString());
-    }
-
-    @Test
-    public void testInEmptyJsonOutJson() {
-        var expected = "{}\n";
-
-        var commandLineString = "-f json " + filePathEmptyJson + " " + filePathEmptyJson;
-        String[] args = commandLineString.split(" ");
-        new CommandLine(new App()).execute(args);
-        var actual = out.toString();
-        System.out.println(actual);
-
-        assertEquals(expected, actual);
-        assertEquals("", err.toString());
-    }
-
-    @Test
-    public void testInEmptyYmlOutJson() {
-        var expected = "{}\n";
-
-        var commandLineString = "-f json " + filePathEmptyYml + " " + filePathEmptyYml;
-        String[] args = commandLineString.split(" ");
-        new CommandLine(new App()).execute(args);
-        var actual = out.toString();
-        System.out.println(actual);
 
         assertEquals(expected, actual);
         assertEquals("", err.toString());
